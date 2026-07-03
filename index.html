@@ -81,16 +81,17 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 @media (max-width:900px){
   .select-sec{margin-top:-10px}
   .select-sec .wrap{padding:0 10px}
-  .top-select{width:auto;flex-direction:column;align-items:stretch;padding:12px 12px;gap:11px}
+  .top-select{width:max-content;max-width:100%;margin:0 auto;flex-direction:column;align-items:stretch;padding:12px 12px;gap:11px}
   .ts-btn{height:40px;padding:0 10px;font-size:13.5px}
   .ts-btns{gap:6px}
+  #makerBtns .ts-btn{padding:0 16px}
   .ts-div{width:100%;height:1px;background:var(--line)}
   .ts-group{gap:8px}
   .ts-label{font-size:12.5px;min-width:54px}
   .ts-lb{display:inline}
   .top-select.ts-float{top:8px;left:0;right:0;width:max-content;max-width:calc(100% - 12px);margin:0 auto;flex-direction:column;align-items:flex-start;gap:6px;padding:8px 38px 8px 10px}
   .top-select.ts-float .ts-group{width:auto}
-  .top-select.ts-float .ts-label{display:block;min-width:auto;text-align:left}
+  .top-select.ts-float .ts-label{display:block;width:54px;min-width:54px;flex-shrink:0;text-align:left}
   .top-select.ts-float .ts-group{gap:8px}
   .top-select.ts-float .ts-btns{gap:5px;overflow:visible;flex-wrap:nowrap}
   .top-select.ts-float .ts-btn{padding:0 9px;font-size:13px}
