@@ -508,6 +508,7 @@ el('cardGrid').addEventListener('click',function(e){
       ts.classList.toggle('ts-float', on);
       sp.style.height=on ? h+'px' : '0';
       tt.classList.toggle('on', on);
+      if(on && window.innerWidth<=900){ ts.classList.add('ts-collapsed'); }
     }
   }
   tt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
