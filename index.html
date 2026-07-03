@@ -68,11 +68,9 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .top-select.ts-float .ts-btn{height:38px;padding:0 13px}
 .top-select.ts-float .ts-lb{display:inline}
 .top-select.ts-float .ts-label{line-height:1.35;text-align:center}
-.top-select.ts-float .ts-fold{display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-left:auto;border:1px solid var(--line-2);border-radius:50%;background:var(--surface);color:var(--ink-2);font-size:12px;cursor:pointer}
-.top-select.ts-float .ts-fold:hover{border-color:var(--accent);color:var(--accent)}
-.top-select.ts-float.ts-collapsed .ts-group,.top-select.ts-float.ts-collapsed .ts-div{display:none}
-.top-select.ts-float.ts-collapsed{padding:7px 10px}
-.top-select.ts-float.ts-collapsed .ts-fold{margin-left:0}
+.top-select.ts-float + .ts-fold{display:flex;position:fixed;top:14px;right:14px;z-index:75;width:32px;height:32px;align-items:center;justify-content:center;border:1px solid var(--line-2);border-radius:50%;background:var(--surface);color:var(--ink-2);font-size:12px;cursor:pointer;box-shadow:var(--shadow-sm)}
+.top-select.ts-float + .ts-fold:hover{border-color:var(--accent);color:var(--accent)}
+.top-select.ts-float.ts-collapsed{display:none}
 @keyframes tsDrop{from{transform:translateY(-130%)}to{transform:none}}
 /* 맨 위로 버튼 */
 .to-top{position:fixed;right:22px;bottom:22px;z-index:90;width:48px;height:48px;border-radius:50%;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;color:var(--ink);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s}
@@ -96,10 +94,8 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
   .top-select.ts-float .ts-group{gap:8px}
   .top-select.ts-float .ts-btns{gap:5px;overflow:visible;flex-wrap:nowrap}
   .top-select.ts-float .ts-btn{padding:0 9px;font-size:13px}
-  .top-select.ts-float .ts-fold{position:absolute;top:8px;right:8px;margin:0}
+  .top-select.ts-float + .ts-fold{top:8px;right:8px}
   .top-select.ts-float{position:fixed}
-  .top-select.ts-float.ts-collapsed{position:fixed;left:auto;right:8px;margin:0;padding:7px 10px}
-  .top-select.ts-float.ts-collapsed .ts-fold{position:static}
   .top-select.ts-float .ts-div{display:block;align-self:stretch;width:auto;height:1px;background:var(--line)}
   .top-select.ts-float .ts-btn{height:36px}
 }
@@ -303,8 +299,8 @@ a.deal-row:hover .dr-arrow{color:var(--accent)}
           <button type="button" class="ts-btn" data-maker="apple">애플</button>
         </div>
       </div>
-      <button type="button" class="ts-fold" id="tsFold" aria-label="메뉴 접기">▴</button>
     </div>
+    <button type="button" class="ts-fold" id="tsFold" aria-label="메뉴 접기">▴</button>
     <div id="tsSpacer" aria-hidden="true"></div>
   </div>
 </section>
