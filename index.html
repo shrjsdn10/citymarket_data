@@ -64,11 +64,15 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 
 #tsSpacer{height:0}
 /* 스크롤 시 플로팅 박스로 전환 */
-.top-select.ts-float{position:fixed;top:12px;left:16px;right:16px;max-width:calc(var(--maxw) - 48px);margin:0 auto;z-index:70;flex-direction:row;align-items:center;gap:12px;padding:10px 16px;background:rgba(255,255,255,.95);backdrop-filter:saturate(180%) blur(14px);box-shadow:var(--shadow-md);animation:tsDrop .25s var(--ease)}
+.top-select.ts-float{position:fixed;top:12px;left:16px;right:auto;margin:0;max-width:calc(100% - 96px);z-index:70;flex-direction:row;align-items:center;gap:12px;padding:10px 16px;background:rgba(255,255,255,.95);backdrop-filter:saturate(180%) blur(14px);box-shadow:var(--shadow-md);animation:tsDrop .25s var(--ease)}
 .top-select.ts-float .ts-btn{height:38px;padding:0 13px}
 .top-select.ts-float .ts-lb{display:inline}
 .top-select.ts-float .ts-label{line-height:1.35;text-align:center}
-.top-select.ts-float + .ts-fold{display:flex;position:fixed;top:14px;right:14px;z-index:75;width:32px;height:32px;align-items:center;justify-content:center;border:1px solid var(--line-2);border-radius:50%;background:var(--surface);color:var(--ink-2);font-size:12px;cursor:pointer;box-shadow:var(--shadow-sm)}
+.top-select.ts-float + .ts-fold{display:flex;position:fixed;top:22px;right:22px;z-index:75;width:48px;height:48px;align-items:center;justify-content:center;border:1px solid var(--line-2);border-radius:50%;background:var(--surface);color:var(--ink);cursor:pointer;box-shadow:var(--shadow-md)}
+.ts-fold svg{display:block}
+.ts-fold .i-unfold{display:none}
+.top-select.ts-float.ts-collapsed + .ts-fold .i-fold{display:none}
+.top-select.ts-float.ts-collapsed + .ts-fold .i-unfold{display:block}
 .top-select.ts-float + .ts-fold:hover{border-color:var(--accent);color:var(--accent)}
 .top-select.ts-float.ts-collapsed{display:none}
 @keyframes tsDrop{from{transform:translateY(-130%)}to{transform:none}}
@@ -88,13 +92,13 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
   .ts-group{gap:8px}
   .ts-label{font-size:12.5px;min-width:54px}
   .ts-lb{display:inline}
-  .top-select.ts-float{top:8px;left:0;right:0;width:max-content;max-width:calc(100% - 12px);margin:0 auto;flex-direction:column;align-items:flex-start;gap:6px;padding:8px 38px 8px 10px}
+  .top-select.ts-float{top:8px;left:8px;right:auto;margin:0;width:max-content;max-width:calc(100% - 68px);flex-direction:column;align-items:flex-start;gap:6px;padding:8px 12px}
   .top-select.ts-float .ts-group{width:auto}
   .top-select.ts-float .ts-label{display:block;width:54px;min-width:54px;flex-shrink:0;text-align:left}
   .top-select.ts-float .ts-group{gap:8px}
   .top-select.ts-float .ts-btns{gap:5px;overflow:visible;flex-wrap:nowrap}
   .top-select.ts-float .ts-btn{padding:0 9px;font-size:13px}
-  .top-select.ts-float + .ts-fold{top:8px;right:8px}
+  .top-select.ts-float + .ts-fold{top:14px;right:14px;width:44px;height:44px}
   .top-select.ts-float{position:fixed}
   .top-select.ts-float .ts-div{display:block;align-self:stretch;width:auto;height:1px;background:var(--line)}
   .top-select.ts-float .ts-btn{height:36px}
@@ -300,7 +304,7 @@ a.deal-row:hover .dr-arrow{color:var(--accent)}
         </div>
       </div>
     </div>
-    <button type="button" class="ts-fold" id="tsFold" aria-label="메뉴 접기">▴</button>
+    <button type="button" class="ts-fold" id="tsFold" aria-label="메뉴 접기"><svg class="i-fold" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg><svg class="i-unfold" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
     <div id="tsSpacer" aria-hidden="true"></div>
   </div>
 </section>
@@ -491,7 +495,6 @@ el('cardGrid').addEventListener('click',function(e){
   if(tf){
     tf.addEventListener('click',function(){
       var c=ts.classList.toggle('ts-collapsed');
-      tf.textContent=c?'▾':'▴';
       tf.setAttribute('aria-label', c?'메뉴 펼치기':'메뉴 접기');
     });
   }
