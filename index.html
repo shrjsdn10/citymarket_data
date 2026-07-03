@@ -112,6 +112,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
   .top-select.ts-float.ts-collapsed .ts-div{display:block;align-self:center;width:1px;height:22px;background:var(--line-2)}
   .top-select.ts-float.ts-collapsed .ts-btn{display:none}
   .top-select.ts-float.ts-collapsed .ts-btn.on{display:inline-flex;border-color:var(--line-2);background:var(--surface);box-shadow:none;pointer-events:none}
+  .ts-btns.fresh .ts-btn.on{border-color:var(--line-2);background:var(--surface);box-shadow:none}
   .top-select.ts-float.ts-collapsed .ts-group{width:auto;gap:6px}
   .top-select.ts-float{position:fixed}
   .top-select.ts-float .ts-div{display:block;align-self:stretch;width:auto;height:1px;background:var(--line)}
@@ -476,7 +477,7 @@ function render(){
 var tsPick=function(){};
 function bindSeg(id, attr, fn){
   el(id).addEventListener('click', function(e){
-    var b=e.target.closest('button['+attr+']'); if(!b || b.classList.contains('on')) return;
+    var b=e.target.closest('button['+attr+']'); if(!b) return;
     Array.prototype.forEach.call(this.querySelectorAll('.ts-btn'),function(x){ x.classList.toggle('on', x===b); });
     fn(b.getAttribute(attr));
   });
@@ -520,22 +521,28 @@ el('cardGrid').addEventListener('click',function(e){
   /* 모바일: 접힌 메뉴 클릭 → 펼침, 통신사+제조사 선택 완료 → 자동 접힘 */
   var picked={carrier:false,maker:false};
   function isMobileTs(){ return window.innerWidth<=900; }
+  function setFresh(on){
+    el('carrierBtns').classList.toggle('fresh',on);
+    el('makerBtns').classList.toggle('fresh',on);
+  }
   tsPick=function(kind){
     if(!isMobileTs()||!ts.classList.contains('ts-float')||ts.classList.contains('ts-collapsed')) return;
+    el(kind==='carrier'?'carrierBtns':'makerBtns').classList.remove('fresh');
     picked[kind]=true;
     if(picked.carrier&&picked.maker){
       picked={carrier:false,maker:false};
-      setTimeout(function(){ ts.classList.add('ts-collapsed'); },250);
+      setTimeout(function(){ ts.classList.add('ts-collapsed'); setFresh(false); },250);
     }
   };
   ts.addEventListener('click',function(){
     if(!isMobileTs()||!ts.classList.contains('ts-float')||!ts.classList.contains('ts-collapsed')) return;
     ts.classList.remove('ts-collapsed');
     picked={carrier:false,maker:false};
+    setFresh(true);
   });
   document.addEventListener('click',function(e){
     if(!isMobileTs()||!ts.classList.contains('ts-float')||ts.classList.contains('ts-collapsed')) return;
-    if(!ts.contains(e.target)) ts.classList.add('ts-collapsed');
+    if(!ts.contains(e.target)){ ts.classList.add('ts-collapsed'); setFresh(false); }
   });
   measure();
   window.addEventListener('resize',function(){ measure(); onScroll(); });
