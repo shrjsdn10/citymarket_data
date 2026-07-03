@@ -98,20 +98,20 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
   .ts-group{gap:8px}
   .ts-label{font-size:12.5px;min-width:54px}
   .ts-lb{display:inline}
-  .top-select.ts-float{top:8px;left:auto;right:66px;margin:0;width:max-content;max-width:calc(100% - 90px);flex-direction:column;align-items:flex-start;gap:6px;padding:8px 12px;transform-origin:top right;animation:tsPop .22s var(--ease)}
+  .top-select.ts-float{top:8px;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100% - 20px);flex-direction:column;align-items:flex-start;gap:6px;padding:8px 12px;transform-origin:top center;animation:tsPop .22s var(--ease)}
   @keyframes tsPop{from{opacity:0;transform:scale(.7) translateY(-10px)}to{opacity:1;transform:none}}
   .top-select.ts-float .ts-group{width:auto}
   .top-select.ts-float .ts-label{display:block;width:54px;min-width:54px;flex-shrink:0;text-align:left}
   .top-select.ts-float .ts-group{gap:8px}
   .top-select.ts-float .ts-btns{gap:5px;overflow:visible;flex-wrap:nowrap}
   .top-select.ts-float .ts-btn{padding:0 9px;font-size:13px}
-  .top-select.ts-float + .ts-fold{top:14px;right:14px;width:44px;height:44px}
-  .top-select.ts-float.ts-collapsed{display:flex;top:14px;right:66px;flex-direction:row;align-items:center;gap:8px;padding:4px 10px;min-height:44px;width:max-content}
+  .top-select.ts-float + .ts-fold{display:none}
+  .top-select.ts-float.ts-collapsed{display:flex;top:8px;left:0;right:0;margin:0 auto;flex-direction:row;align-items:center;gap:8px;padding:4px 12px;min-height:44px;width:max-content;cursor:pointer}
   .top-select.ts-float.ts-collapsed .ts-l1{display:none}
   .top-select.ts-float.ts-collapsed .ts-label{width:auto;min-width:0}
   .top-select.ts-float.ts-collapsed .ts-div{display:block;align-self:center;width:1px;height:22px;background:var(--line-2)}
   .top-select.ts-float.ts-collapsed .ts-btn{display:none}
-  .top-select.ts-float.ts-collapsed .ts-btn.on{display:inline-flex}
+  .top-select.ts-float.ts-collapsed .ts-btn.on{display:inline-flex;border-color:var(--line-2);background:var(--surface);box-shadow:none;pointer-events:none}
   .top-select.ts-float.ts-collapsed .ts-group{width:auto;gap:6px}
   .top-select.ts-float{position:fixed}
   .top-select.ts-float .ts-div{display:block;align-self:stretch;width:auto;height:1px;background:var(--line)}
@@ -473,6 +473,7 @@ function render(){
 }
 
 /* ---- 이벤트 : 통신사/제조사 선택 ---- */
+var tsPick=function(){};
 function bindSeg(id, attr, fn){
   el(id).addEventListener('click', function(e){
     var b=e.target.closest('button['+attr+']'); if(!b || b.classList.contains('on')) return;
@@ -480,8 +481,8 @@ function bindSeg(id, attr, fn){
     fn(b.getAttribute(attr));
   });
 }
-bindSeg('carrierBtns','data-carrier',function(v){ state.carrier=v; render(); });
-bindSeg('makerBtns','data-maker',function(v){ state.maker=v; render(); });
+bindSeg('carrierBtns','data-carrier',function(v){ state.carrier=v; render(); tsPick('carrier'); });
+bindSeg('makerBtns','data-maker',function(v){ state.maker=v; render(); tsPick('maker'); });
 
 /* 카드 용량 선택 */
 el('cardGrid').addEventListener('click',function(e){
@@ -516,6 +517,26 @@ el('cardGrid').addEventListener('click',function(e){
       tf.setAttribute('aria-label', c?'메뉴 펼치기':'메뉴 접기');
     });
   }
+  /* 모바일: 접힌 메뉴 클릭 → 펼침, 통신사+제조사 선택 완료 → 자동 접힘 */
+  var picked={carrier:false,maker:false};
+  function isMobileTs(){ return window.innerWidth<=900; }
+  tsPick=function(kind){
+    if(!isMobileTs()||!ts.classList.contains('ts-float')||ts.classList.contains('ts-collapsed')) return;
+    picked[kind]=true;
+    if(picked.carrier&&picked.maker){
+      picked={carrier:false,maker:false};
+      setTimeout(function(){ ts.classList.add('ts-collapsed'); },250);
+    }
+  };
+  ts.addEventListener('click',function(){
+    if(!isMobileTs()||!ts.classList.contains('ts-float')||!ts.classList.contains('ts-collapsed')) return;
+    ts.classList.remove('ts-collapsed');
+    picked={carrier:false,maker:false};
+  });
+  document.addEventListener('click',function(e){
+    if(!isMobileTs()||!ts.classList.contains('ts-float')||ts.classList.contains('ts-collapsed')) return;
+    if(!ts.contains(e.target)) ts.classList.add('ts-collapsed');
+  });
   measure();
   window.addEventListener('resize',function(){ measure(); onScroll(); });
   window.addEventListener('scroll',onScroll,{passive:true});
