@@ -132,7 +132,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .deal-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
 .dc-hero{position:relative;width:100%}
 .dc-media{position:relative;height:236px;width:100%;background:radial-gradient(125% 95% at 50% 0,#fff 0,var(--field) 100%);
-  display:flex;align-items:flex-start;justify-content:center;padding-top:16px}
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:72px}
 .dc-device{width:62px;height:128px;border:2px solid var(--line-2);border-radius:13px;background:var(--surface);position:relative;box-shadow:var(--shadow-sm)}
 .dc-device::before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:20px;height:3px;border-radius:3px;background:var(--line-2)}
 .dc-photo{height:150px;width:auto;max-width:90%;object-fit:contain;filter:drop-shadow(0 9px 16px rgba(17,17,26,.16))}
@@ -219,8 +219,8 @@ a.deal-row:hover .dr-arrow{color:var(--accent)}
 @media (max-width:640px){
   .card-grid{grid-template-columns:1fr;gap:10px}
   .deal-card{flex-direction:row;align-items:stretch}
-  .dc-hero{flex:0 0 40%;min-width:0;display:flex;flex-direction:column;background:radial-gradient(125% 95% at 50% 0,#fff 0,var(--field) 100%)}
-  .dc-media{height:auto;min-height:0;flex:0 0 auto;background:none;padding:12px 0 0}
+  .dc-hero{flex:0 0 40%;min-width:0;display:flex;flex-direction:column;justify-content:center;padding:10px 0;background:radial-gradient(125% 95% at 50% 0,#fff 0,var(--field) 100%)}
+  .dc-media{height:auto;min-height:0;flex:0 0 auto;background:none;padding:0}
   .dc-photo{height:132px}
   .dc-photo.sz-s{height:122px}
   .dc-photo.sz-m{height:128px}
@@ -229,7 +229,7 @@ a.deal-row:hover .dr-arrow{color:var(--accent)}
   .dc-body{padding:8px 11px 9px;flex:1;min-width:0}
   .dc-name{font-size:13.5px}
   .dc-caps{gap:4px}
-  .dc-title{position:static;flex:1;justify-content:center;margin:0;padding:4px 4px 6px;gap:5px}
+  .dc-title{position:static;flex:0 0 auto;margin-top:7px;padding:0 4px;gap:5px}
   .dc-cap{font-size:12px;padding:4px 10px}
   .dc-deals .deal-row{padding:5px 0;gap:7px}
   .dr-logo{width:37px;height:37px;font-size:12px;border-radius:10px}
