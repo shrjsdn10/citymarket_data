@@ -105,6 +105,12 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
   .top-select.ts-float .ts-btns{gap:5px;overflow:visible;flex-wrap:nowrap}
   .top-select.ts-float .ts-btn{padding:0 9px;font-size:13px}
   .top-select.ts-float + .ts-fold{top:14px;right:14px;width:44px;height:44px}
+  .top-select.ts-float.ts-collapsed{display:flex;flex-direction:row;align-items:center;gap:6px;padding:7px 10px;width:max-content}
+  .top-select.ts-float.ts-collapsed .ts-label,
+  .top-select.ts-float.ts-collapsed .ts-div,
+  .top-select.ts-float.ts-collapsed .ts-btn{display:none}
+  .top-select.ts-float.ts-collapsed .ts-btn.on{display:inline-flex}
+  .top-select.ts-float.ts-collapsed .ts-group{width:auto}
   .top-select.ts-float{position:fixed}
   .top-select.ts-float .ts-div{display:block;align-self:stretch;width:auto;height:1px;background:var(--line)}
   .top-select.ts-float .ts-btn{height:36px}
