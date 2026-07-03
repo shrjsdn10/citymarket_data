@@ -47,6 +47,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .top-select{width:max-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:14px 26px;display:flex;flex-direction:row;align-items:center;gap:20px}
 .ts-group{display:flex;align-items:center;gap:14px;min-width:0}
 .ts-label{font-size:13px;font-weight:800;color:var(--ink-2);white-space:nowrap;line-height:1.35}
+.ts-lb{display:none}
 .ts-fold{display:none}
 .ts-div{width:1px;height:28px;background:var(--line-2);flex-shrink:0}
 .ts-btns{display:flex;gap:8px;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -65,6 +66,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 /* 스크롤 시 플로팅 박스로 전환 */
 .top-select.ts-float{position:fixed;top:12px;left:16px;right:16px;max-width:calc(var(--maxw) - 48px);margin:0 auto;z-index:70;flex-direction:row;align-items:center;gap:12px;padding:10px 16px;background:rgba(255,255,255,.95);backdrop-filter:saturate(180%) blur(14px);box-shadow:var(--shadow-md);animation:tsDrop .25s var(--ease)}
 .top-select.ts-float .ts-btn{height:38px;padding:0 13px}
+.top-select.ts-float .ts-lb{display:inline}
 .top-select.ts-float .ts-label{line-height:1.35;text-align:center}
 .top-select.ts-float .ts-fold{display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-left:auto;border:1px solid var(--line-2);border-radius:50%;background:var(--surface);color:var(--ink-2);font-size:12px;cursor:pointer}
 .top-select.ts-float .ts-fold:hover{border-color:var(--accent);color:var(--accent)}
@@ -80,10 +82,14 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 @media (max-width:680px){.to-top{right:14px;bottom:14px;width:44px;height:44px}}
 @media (max-width:900px){
   .select-sec{margin-top:-10px}
-  .top-select{width:auto;flex-direction:column;align-items:stretch;padding:14px 16px;gap:12px}
+  .select-sec .wrap{padding:0 10px}
+  .top-select{width:auto;flex-direction:column;align-items:stretch;padding:12px 12px;gap:11px}
+  .ts-btn{height:40px;padding:0 10px;font-size:13.5px}
+  .ts-btns{gap:6px}
   .ts-div{width:100%;height:1px;background:var(--line)}
-  .ts-group{gap:10px}
-  .ts-label{font-size:12.5px;min-width:64px}
+  .ts-group{gap:8px}
+  .ts-label{font-size:12.5px;min-width:54px}
+  .ts-lb{display:inline}
   .top-select.ts-float{top:8px;left:0;right:0;width:max-content;max-width:calc(100% - 12px);margin:0 auto;flex-direction:column;align-items:flex-start;gap:6px;padding:8px 38px 8px 10px}
   .top-select.ts-float .ts-group{width:auto}
   .top-select.ts-float .ts-label{display:block;min-width:auto;text-align:left}
@@ -92,7 +98,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
   .top-select.ts-float .ts-btn{padding:0 9px;font-size:13px}
   .top-select.ts-float .ts-fold{position:absolute;top:8px;right:8px;margin:0}
   .top-select.ts-float{position:fixed}
-  .top-select.ts-float.ts-collapsed{position:fixed;padding:7px 10px}
+  .top-select.ts-float.ts-collapsed{position:fixed;left:auto;right:8px;margin:0;padding:7px 10px}
   .top-select.ts-float.ts-collapsed .ts-fold{position:static}
   .top-select.ts-float .ts-div{display:block;align-self:stretch;width:auto;height:1px;background:var(--line)}
   .top-select.ts-float .ts-btn{height:36px}
@@ -280,7 +286,7 @@ a.deal-row:hover .dr-arrow{color:var(--accent)}
   <div class="wrap">
     <div class="top-select" id="topSelect">
       <div class="ts-group">
-        <span class="ts-label">이용중인<br class="ts-lb">통신사</span>
+        <span class="ts-label">이용중인<br class="ts-lb"> 통신사</span>
         <div class="ts-btns" id="carrierBtns">
           <button type="button" class="ts-btn on" data-carrier="skt">SKT</button>
           <button type="button" class="ts-btn" data-carrier="kt">KT</button>
