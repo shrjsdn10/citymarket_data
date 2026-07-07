@@ -60,6 +60,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .ts-btn[data-carrier="lgu"]{color:#e6007e}
 .ts-btn[data-maker="samsung"]{color:#1428a0}
 .ts-btn[data-maker="apple"]{color:#1d1d1f}
+.ts-btn[data-maker="special"]{color:var(--accent)}
 .ts-btn svg{flex-shrink:0;display:block}
 
 #tsSpacer{height:0}
@@ -311,11 +312,12 @@ a.deal-row:hover .dr-arrow{color:var(--accent)}
       </div>
       <div class="ts-div" aria-hidden="true"></div>
       <div class="ts-group">
-        <span class="ts-label">제조사</span>
+        <span class="ts-label">구분</span>
         <div class="ts-btns" id="makerBtns">
           <button type="button" class="ts-btn on" data-maker="all">전체</button>
           <button type="button" class="ts-btn" data-maker="samsung">삼성</button>
           <button type="button" class="ts-btn" data-maker="apple">애플</button>
+          <button type="button" class="ts-btn" data-maker="special">특가</button>
         </div>
       </div>
     </div>
@@ -464,8 +466,19 @@ function cardHTML(d){
     '<div class="dc-title"><div class="dc-name">'+d.n+'</div></div></div>'+
     '<div class="dc-body"><div class="dc-deals">'+rows+'</div></div></div>';
 }
+function isSpecial(d){
+  var hit=false;
+  ['skt','kt','lgu'].forEach(function(c){
+    if(d.bo[c]!==null && d.bo[c]<=0) hit=true;
+    if(d.gi[c]!==null && d.gi[c]<=0) hit=true;
+  });
+  return hit;
+}
 function render(){
-  var list=DEALS.filter(function(d){ return state.maker==='all' || d.mk===state.maker; });
+  var list=DEALS.filter(function(d){
+    if(state.maker==='special') return isSpecial(d);
+    return state.maker==='all' || d.mk===state.maker;
+  });
   el('cardGrid').innerHTML=list.map(cardHTML).join('') || '<div style="padding:40px;text-align:center;color:var(--ink-3)">조건에 맞는 기종이 없어요.</div>';
 }
 
