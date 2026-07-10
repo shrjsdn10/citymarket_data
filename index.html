@@ -125,7 +125,8 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .hero::before{content:"";position:absolute;right:-120px;top:-80px;width:560px;height:420px;
   background:radial-gradient(ellipse at center,rgba(240,97,15,.18),transparent 70%);filter:blur(26px)}
 .hero-in{position:relative;padding:36px 0 34px;text-align:center;animation:riseIn .6s var(--ease) both}
-.hero-logo{display:block;height:38px;width:auto;margin:0 auto 14px}
+.hero-brand{margin-bottom:12px}
+.hero-logo{display:block;height:58px;width:auto;margin:0 auto}
 .hero .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--accent);
   background:var(--surface);border:1px solid var(--line);padding:7px 15px;border-radius:var(--r-pill);box-shadow:var(--shadow-sm);margin-bottom:12px}
 .hero .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
@@ -251,7 +252,8 @@ a.deal-row:hover .dr-arrow{color:var(--accent)}
   .nav-menu a{padding:13px 0;font-size:16px}
   .nav-login{font-size:12.5px;padding:8px 12px}
   .hero h1{font-size:32px}.hero p{font-size:15.5px}
-  .hero-logo{height:30px;margin-bottom:11px}
+  .hero-logo{height:42px}
+  .hero-brand{margin-bottom:9px}
   .deals-head h2{font-size:23px}
 }
 @media (max-width:640px){
@@ -294,8 +296,7 @@ a.deal-row:hover .dr-arrow{color:var(--accent)}
 <!-- ===== 히어로 ===== -->
 <section class="hero">
   <div class="wrap hero-in">
-    <img class="hero-logo" src="img/logo_phonespot_lg.webp" alt="폰스팟">
-    <h1>휴대폰, <b>정직한 가격</b>으로.</h1>
+    <h1 class="hero-brand"><img class="hero-logo" src="img/logo_phonespot_lg.webp" alt="폰스팟"></h1>
     <p>통신사·기종별 실구매가를 한눈에 비교하고 바로 신청하세요.</p>
   </div>
 </section>
